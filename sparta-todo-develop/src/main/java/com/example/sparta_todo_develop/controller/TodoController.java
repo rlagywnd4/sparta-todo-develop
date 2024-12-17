@@ -34,10 +34,17 @@ public class TodoController {
      * @return List<TodoResponseDto>
      */
     @GetMapping
-    public ResponseEntity<List<TodoResponseDto>> getAllTodos(){
-        List<TodoResponseDto> responseDtos = todoService.getTodos();
+    public ResponseEntity<List<TodoResponseDto>> findAll(){
+        List<TodoResponseDto> responseDtos = todoService.findAll();
 
         return ResponseEntity.ok(responseDtos);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<TodoResponseDto> findById(@PathVariable Long id){
+        TodoResponseDto responseDto = todoService.findById(id);
+
+        return ResponseEntity.ok(responseDto);
     }
 
     // TODO: update
