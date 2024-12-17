@@ -19,13 +19,13 @@ public class TodoController {
     private final TodoService todoService;
 
     /**
-     * create todo
+     * save todo
      * @param requestDto
      * @return ResponseEntity.ok(responseDto)
      */
     @PostMapping
-    public ResponseEntity<TodoResponseDto> createTodo(@RequestBody TodoRequestDto requestDto){
-        TodoResponseDto responseDto = todoService.createTodo(requestDto);
+    public ResponseEntity<TodoResponseDto> saveTodo(@RequestBody TodoRequestDto requestDto){
+        TodoResponseDto responseDto = todoService.saveTodo(requestDto);
 
         return ResponseEntity.ok(responseDto);
     }

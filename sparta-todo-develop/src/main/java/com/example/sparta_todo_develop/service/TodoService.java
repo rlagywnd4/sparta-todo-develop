@@ -17,7 +17,7 @@ public class TodoService {
 
     private final TodoRepository todoRepository;
 
-    public TodoResponseDto createTodo(TodoRequestDto requestDto) {
+    public TodoResponseDto saveTodo(TodoRequestDto requestDto) {
         Todo todo = new Todo(requestDto.getUserName(), requestDto.getTitle(), requestDto.getContent());
 
         Todo savedTodo = todoRepository.save(todo);
