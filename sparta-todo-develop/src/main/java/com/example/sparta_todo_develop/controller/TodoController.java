@@ -2,8 +2,10 @@ package com.example.sparta_todo_develop.controller;
 
 import com.example.sparta_todo_develop.dto.TodoRequestDto;
 import com.example.sparta_todo_develop.dto.TodoResponseDto;
+import com.example.sparta_todo_develop.dto.UpdateTodoRequestDto;
 import com.example.sparta_todo_develop.service.TodoService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +18,11 @@ public class TodoController {
 
     private final TodoService todoService;
 
-    // TODO: create
+    /**
+     * create todo
+     * @param requestDto
+     * @return ResponseEntity.ok(responseDto)
+     */
     @PostMapping
     public ResponseEntity<TodoResponseDto> createTodo(@RequestBody TodoRequestDto requestDto){
         TodoResponseDto responseDto = todoService.createTodo(requestDto);
@@ -30,7 +36,7 @@ public class TodoController {
     //      선택 일정 조회    조건: 고유 식별자(id)를 사용하여 조회
 
     /**
-     * 모든 todo 반환
+     * find all todos
      * @return List<TodoResponseDto>
      */
     @GetMapping
@@ -40,6 +46,11 @@ public class TodoController {
         return ResponseEntity.ok(responseDtos);
     }
 
+    /**
+     * find todo by id
+     * @param id
+     * @return ResponseEntity.ok(responseDto)
+     */
     @GetMapping("/{id}")
     public ResponseEntity<TodoResponseDto> findById(@PathVariable Long id){
         TodoResponseDto responseDto = todoService.findById(id);
@@ -47,7 +58,29 @@ public class TodoController {
         return ResponseEntity.ok(responseDto);
     }
 
-    // TODO: update
-    // TODO: delete
+    /**
+     * update todo by id
+     * @param id
+     * @param requestDto
+     * @return ResponseEntity.ok(responseDto)
+     */
+    @PatchMapping("/{id}")
+    public ResponseEntity<TodoResponseDto> updateTodo(@PathVariable Long id, @RequestBody UpdateTodoRequestDto requestDto){
+        TodoResponseDto responseDto = todoService.updateTodo(id, requestDto.getTitle(), requestDto.getContent());
+
+        return ResponseEntity.ok(responseDto);
+    }
+
+    /**
+     * delete todo by id
+     * @param id
+     * @return ResponseEntity<>(HttpStatus.OK)
+     */
+    @DeleteMapping("/{id}")
+    public  ResponseEntity<Void> deleteTodo(@PathVariable Long id){
+        todoService.deleteTodo(id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }

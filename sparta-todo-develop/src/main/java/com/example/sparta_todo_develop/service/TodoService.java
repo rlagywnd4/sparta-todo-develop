@@ -4,13 +4,11 @@ import com.example.sparta_todo_develop.dto.TodoRequestDto;
 import com.example.sparta_todo_develop.dto.TodoResponseDto;
 import com.example.sparta_todo_develop.entity.Todo;
 import com.example.sparta_todo_develop.repository.TodoRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,5 +35,20 @@ public class TodoService {
         Todo findTodo = todoRepository.findByIdOrElseThrow(id);
 
         return new TodoResponseDto(findTodo);
+    }
+
+    @Transactional
+    public TodoResponseDto updateTodo(Long id, String title, String content) {
+        Todo findTodo = todoRepository.findByIdOrElseThrow(id);
+
+        findTodo.updateTodo(title, content);
+
+        return new TodoResponseDto(findTodo);
+    }
+
+    public void deleteTodo(Long id) {
+        Todo findTodo = todoRepository.findByIdOrElseThrow(id);
+
+        todoRepository.delete(findTodo);
     }
 }

@@ -24,4 +24,9 @@ public class Todo extends BaseEntity {
         this.title = title;
         this.content = content;
     }
+
+    public void updateTodo(String title, String content){
+        this.title = title;
+        this.content = content;
+    }
 }
