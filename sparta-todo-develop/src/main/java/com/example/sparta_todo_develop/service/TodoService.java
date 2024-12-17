@@ -34,12 +34,8 @@ public class TodoService {
     }
 
     public TodoResponseDto findById(Long id) {
-        Optional<Todo> optionalTodo = todoRepository.findById(id);
+        Todo findTodo = todoRepository.findByIdOrElseThrow(id);
 
-        if(optionalTodo.isEmpty()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id = " + id);
-        }
-
-        return new TodoResponseDto(optionalTodo.get());
+        return new TodoResponseDto(findTodo);
     }
 }
