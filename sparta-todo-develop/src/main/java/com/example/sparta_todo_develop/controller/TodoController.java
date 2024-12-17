@@ -1,8 +1,8 @@
 package com.example.sparta_todo_develop.controller;
 
-import com.example.sparta_todo_develop.dto.TodoRequestDto;
-import com.example.sparta_todo_develop.dto.TodoResponseDto;
-import com.example.sparta_todo_develop.dto.UpdateTodoRequestDto;
+import com.example.sparta_todo_develop.dto.todo.TodoRequestDto;
+import com.example.sparta_todo_develop.dto.todo.TodoResponseDto;
+import com.example.sparta_todo_develop.dto.todo.UpdateTodoRequestDto;
 import com.example.sparta_todo_develop.service.TodoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

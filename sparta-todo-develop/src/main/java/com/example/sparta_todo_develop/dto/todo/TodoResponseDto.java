@@ -1,4 +1,4 @@
-package com.example.sparta_todo_develop.dto;
+package com.example.sparta_todo_develop.dto.todo;
 
 import com.example.sparta_todo_develop.entity.Todo;
 import lombok.AllArgsConstructor;

@@ -1,7 +1,7 @@
 package com.example.sparta_todo_develop.service;
 
-import com.example.sparta_todo_develop.dto.TodoRequestDto;
-import com.example.sparta_todo_develop.dto.TodoResponseDto;
+import com.example.sparta_todo_develop.dto.todo.TodoRequestDto;
+import com.example.sparta_todo_develop.dto.todo.TodoResponseDto;
 import com.example.sparta_todo_develop.entity.Todo;
 import com.example.sparta_todo_develop.repository.TodoRepository;
 import jakarta.transaction.Transactional;
