@@ -7,6 +7,9 @@ import com.example.sparta_todo_develop.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -19,5 +22,11 @@ public class UserService {
         User savedUser = userRepository.save(user);
 
         return new UserResponseDto(savedUser.getId(), savedUser.getName(), savedUser.getEmail());
+    }
+
+    public List<UserResponseDto> findAll() {
+        List<UserResponseDto> responseDtos = userRepository.findAll().stream().map(UserResponseDto::new).collect(Collectors.toList());
+
+        return responseDtos;
     }
 }

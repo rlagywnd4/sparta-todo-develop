@@ -5,10 +5,9 @@ import com.example.sparta_todo_develop.dto.user.UserResponseDto;
 import com.example.sparta_todo_develop.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -24,6 +23,12 @@ public class UserController {
         return ResponseEntity.ok(responseDto);
     }
     //TODO: Read
+    @GetMapping
+    public ResponseEntity<List<UserResponseDto>> findAll(){
+        List<UserResponseDto> responseDtos = userService.findAll();
+
+        return ResponseEntity.ok(responseDtos);
+    }
     //TODO: Update
     //TODO: Delete
 }
