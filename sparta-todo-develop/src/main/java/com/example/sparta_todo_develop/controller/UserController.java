@@ -2,8 +2,10 @@ package com.example.sparta_todo_develop.controller;
 
 import com.example.sparta_todo_develop.dto.user.UserRequestDto;
 import com.example.sparta_todo_develop.dto.user.UserResponseDto;
+import com.example.sparta_todo_develop.entity.User;
 import com.example.sparta_todo_develop.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,5 +32,11 @@ public class UserController {
         return ResponseEntity.ok(responseDtos);
     }
     //TODO: Update
+    @PatchMapping("/{id}")
+    public ResponseEntity<UserResponseDto> updateUser(@PathVariable Long id, @RequestBody UserRequestDto requestDto){
+        UserResponseDto responseDto = userService.updateUser(id, requestDto.getName(), requestDto.getEmail());
+
+        return ResponseEntity.ok(responseDto);
+    }
     //TODO: Delete
 }

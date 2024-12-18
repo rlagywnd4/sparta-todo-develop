@@ -4,6 +4,7 @@ import com.example.sparta_todo_develop.dto.user.UserRequestDto;
 import com.example.sparta_todo_develop.dto.user.UserResponseDto;
 import com.example.sparta_todo_develop.entity.User;
 import com.example.sparta_todo_develop.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +29,14 @@ public class UserService {
         List<UserResponseDto> responseDtos = userRepository.findAll().stream().map(UserResponseDto::new).collect(Collectors.toList());
 
         return responseDtos;
+    }
+
+    @Transactional
+    public  UserResponseDto updateUser(Long id, String name, String email) {
+        User findUser = userRepository.findByIdOrElseThrow(id);
+
+        findUser.updateUser(name, email);
+
+        return new UserResponseDto(findUser);
     }
 }
