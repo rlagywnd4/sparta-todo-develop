@@ -1,6 +1,7 @@
 package com.example.sparta_todo_develop.dto.todo;
 
 import com.example.sparta_todo_develop.entity.Todo;
+import com.example.sparta_todo_develop.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class TodoResponseDto {
     private final Long id;
-    private final String userName;
+    private final User user;
     private String title;
     private String content;
     private LocalDateTime createdAt;
@@ -21,7 +22,7 @@ public class TodoResponseDto {
     //      아마 안될듯, 하나의 메소드,하나의 역할 규칙에 부합한가?
     public TodoResponseDto(Todo todo){
         this.id = todo.getId();
-        this.userName = todo.getUserName();
+        this.user = todo.getUser();
         this.title = todo.getTitle();
         this.content = todo.getContent();
         this.createdAt = todo.getCreatedAt();

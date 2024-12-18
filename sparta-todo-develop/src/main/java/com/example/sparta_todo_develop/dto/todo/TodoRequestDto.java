@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class TodoRequestDto {
-    private final String userName;
+    private final Long userId;
     private String title;
     private String content;
 }
