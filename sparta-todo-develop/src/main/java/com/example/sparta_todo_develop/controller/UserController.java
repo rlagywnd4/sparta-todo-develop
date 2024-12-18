@@ -2,7 +2,6 @@ package com.example.sparta_todo_develop.controller;
 
 import com.example.sparta_todo_develop.dto.user.UserRequestDto;
 import com.example.sparta_todo_develop.dto.user.UserResponseDto;
-import com.example.sparta_todo_develop.entity.User;
 import com.example.sparta_todo_develop.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -39,4 +38,10 @@ public class UserController {
         return ResponseEntity.ok(responseDto);
     }
     //TODO: Delete
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id){
+        userService.deleteUser(id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
