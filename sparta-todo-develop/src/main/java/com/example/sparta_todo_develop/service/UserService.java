@@ -45,4 +45,10 @@ public class UserService {
 
         userRepository.delete(findUser);
     }
+
+    public User findByEmail(String email) {
+        User findUser = userRepository.findByEmailOrElseThrow(email);
+
+        return findUser;
+    }
 }
