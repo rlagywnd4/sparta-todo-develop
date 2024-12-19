@@ -20,7 +20,11 @@ public class UserController {
 
     private final UserService userService;
 
-    //TODO: Create
+    /**
+     * signup
+     * @param requestDto
+     * @return 생성한 user
+     */
     @PostMapping("/signup")
     public ResponseEntity<UserResponseDto> saveUser(@RequestBody UserRequestDto requestDto){
         UserResponseDto responseDto = userService.saveUser(requestDto);
@@ -28,6 +32,12 @@ public class UserController {
         return ResponseEntity.ok(responseDto);
     }
 
+    /**
+     * login
+     * @param requestDto
+     * @param request
+     * @return 성공 여부
+     */
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserRequestDto requestDto, HttpServletRequest request){
         // 이메일로 회원 찾고 비번으로 확인하고 session 발급
@@ -43,21 +53,35 @@ public class UserController {
         return ResponseEntity.ok("success");
     }
 
-    //TODO: Read
+    /**
+     * find all users
+     * @return users
+     */
     @GetMapping
     public ResponseEntity<List<UserResponseDto>> findAll(){
         List<UserResponseDto> responseDtos = userService.findAll();
 
         return ResponseEntity.ok(responseDtos);
     }
-    //TODO: Update
+
+    /**
+     * update user
+     * @param id
+     * @param requestDto
+     * @return updated user
+     */
     @PatchMapping("/{id}")
     public ResponseEntity<UserResponseDto> updateUser(@PathVariable Long id, @RequestBody UserRequestDto requestDto){
         UserResponseDto responseDto = userService.updateUser(id, requestDto.getName(), requestDto.getEmail());
 
         return ResponseEntity.ok(responseDto);
     }
-    //TODO: Delete
+
+    /**
+     * delete user
+     * @param id
+     * @return 성공여부
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id){
         userService.deleteUser(id);
