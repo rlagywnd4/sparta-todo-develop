@@ -26,11 +26,11 @@ public class TodoService {
         Todo todo = new Todo(findUser, requestDto.getTitle(), requestDto.getContent());
         Todo savedTodo = todoRepository.save(todo);
 
-        return new TodoResponseDto(savedTodo);
+        return TodoResponseDto.from(savedTodo);
     }
 
     public List<TodoResponseDto> findAll() {
-        List<TodoResponseDto> responseDtos = todoRepository.findAll().stream().map(TodoResponseDto::new).collect(Collectors.toList());
+        List<TodoResponseDto> responseDtos = todoRepository.findAll().stream().map(TodoResponseDto::from).collect(Collectors.toList());
 
         return responseDtos;
     }
@@ -38,7 +38,7 @@ public class TodoService {
     public TodoResponseDto findById(Long id) {
         Todo findTodo = todoRepository.findByIdOrElseThrow(id);
 
-        return new TodoResponseDto(findTodo);
+        return TodoResponseDto.from(findTodo);
     }
 
     @Transactional
@@ -47,7 +47,7 @@ public class TodoService {
 
         findTodo.updateTodo(title, content);
 
-        return new TodoResponseDto(findTodo);
+        return TodoResponseDto.from(findTodo);
     }
 
     public void deleteTodo(Long id) {
