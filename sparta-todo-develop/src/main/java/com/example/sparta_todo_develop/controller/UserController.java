@@ -6,6 +6,7 @@ import com.example.sparta_todo_develop.entity.User;
 import com.example.sparta_todo_develop.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class UserController {
      * @return 생성한 user
      */
     @PostMapping("/signup")
-    public ResponseEntity<UserResponseDto> saveUser(@RequestBody UserRequestDto requestDto){
+    public ResponseEntity<UserResponseDto> saveUser(@Valid @RequestBody UserRequestDto requestDto){
         UserResponseDto responseDto = userService.saveUser(requestDto);
 
         return ResponseEntity.ok(responseDto);
@@ -39,7 +40,7 @@ public class UserController {
      * @return 성공 여부
      */
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UserRequestDto requestDto, HttpServletRequest request){
+    public ResponseEntity<String> login(@Valid @RequestBody UserRequestDto requestDto, HttpServletRequest request){
         // 이메일로 회원 찾고 비번으로 확인하고 session 발급
         User findUser = userService.findByEmail(requestDto.getEmail());
 
@@ -71,7 +72,7 @@ public class UserController {
      * @return updated user
      */
     @PatchMapping("/{id}")
-    public ResponseEntity<UserResponseDto> updateUser(@PathVariable Long id, @RequestBody UserRequestDto requestDto){
+    public ResponseEntity<UserResponseDto> updateUser(@PathVariable Long id, @Valid @RequestBody UserRequestDto requestDto){
         UserResponseDto responseDto = userService.updateUser(id, requestDto.getName(), requestDto.getEmail());
 
         return ResponseEntity.ok(responseDto);
